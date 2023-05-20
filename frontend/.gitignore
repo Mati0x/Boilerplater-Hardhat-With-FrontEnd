@@ -58,6 +58,7 @@ typings/
 .env
 .env.test
 .env.local
+.api/api/.env
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
