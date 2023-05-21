@@ -10,11 +10,16 @@
 		"marketplace": "npx create-web3-dapp marketplace"
 	},
 	"dependencies": {
+		"@emotion/react": "^11.11.0",
+		"@emotion/styled": "^11.11.0",
+		"@mui/material": "^5.13.1",
 		"@rainbow-me/rainbowkit": "^0.12.4",
 		"alchemy-sdk": "^2.6.2",
+		"bootstrap": "^5.2.3",
 		"next": "13.1.2",
 		"react": "18.2.0",
 		"react-dom": "18.2.0",
+		"reactstrap": "^9.1.10",
 		"wagmi": "^0.12.6"
 	},
 	"devDependencies": {

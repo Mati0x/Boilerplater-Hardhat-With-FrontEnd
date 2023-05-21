@@ -43,46 +43,6 @@ border-radius: 8px;
 	margin-left: .3rem;
 }
 
-
-
-
-.buttons_container{
-	display: flex;
-	flex-direction: column;
-	flex-grow: 1;
-	width: 100%;
-	align-content: center;
-	flex-wrap: wrap;
-	gap: 1rem;
-}
-
-.button{
-	display: flex;
-flex-direction: row;
-align-items: center;
-justify-content: center;
-
-padding: 24px 32px;
-gap: 12px;
-
-width: 392px;
-height: 76px;
-
-background: rgba(0, 0, 0, 0.8);
-/* Grayscale/Metal */
-
-border: 1px solid #4E4E4E;
-border-radius: 12px;
-cursor: pointer;
-}
-
-.button p {
-
-font-style: normal;
-font-weight: 700;
-font-size: 20px;
-line-height: 28px;
-}
 .footer{
 	display: flex;
 	flex-direction: column;
