@@ -3,12 +3,9 @@ import { MyVoteToken__factory, TokenizedBallot__factory } from "../typechain-typ
 import * as dotenv from 'dotenv';
 dotenv.config();
 
-
-const MINT_VALUE = ethers.utils.parseUnits("10");
 const TARGET_BLOCK_NUMBER = 2;
 
 async function main() {
-    const [acc1,acc2] = await ethers.getSigners();
     const wallet = new ethers.Wallet(process.env.PRIVATE_KEY ?? "");
     const provider = new ethers.providers.InfuraProvider(
         "sepolia",
