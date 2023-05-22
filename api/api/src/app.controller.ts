@@ -19,7 +19,7 @@ export class AppController {
 
   @Get('contac-address')
   getContactAddress(){
-    return this.appService.getContractAddress();
+    return this.appService.getVoteContractAddress();
   }
 
   @Get('total-supply')

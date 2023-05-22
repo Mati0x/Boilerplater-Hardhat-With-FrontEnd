@@ -16,19 +16,23 @@ export class AppService {
 
     this.provider = new ethers.providers.InfuraProvider("sepolia", this.configService.get<string>('INFURA_API_KEY'));
     this.tokenContract = new ethers.Contract(
-      this.getContractAddress(),
+      this.getVoteContractAddress(),
       tokenJson.abi,
       this.provider);
 
-      this.ballotContract = new ethers.Contract(
-        this.getContractAddress(),
-        ballotJson.abi,
-        this.provider);  
+    this.ballotContract = new ethers.Contract(
+      this.getBallotContractAddress(),
+      ballotJson.abi,
+      this.provider);  
     
     }
 
-  getContractAddress(): string {
+  getVoteContractAddress(): string {
     return this.configService.get<string>('TOKEN_ADDRESS'); 
+  }
+
+  getBallotContractAddress(): string {
+    return this.configService.get<string>('BALLOT_ADDRESS'); 
   }
 
   getHello(): string {
