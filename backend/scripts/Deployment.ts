@@ -5,7 +5,7 @@ dotenv.config();
 
 
 const MINT_VALUE = ethers.utils.parseUnits("10");
-const TARGET_BLOCK_NUMBER = 6;
+const TARGET_BLOCK_NUMBER = 2;
 
 async function main() {
     const [acc1,acc2] = await ethers.getSigners();

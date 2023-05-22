@@ -17,9 +17,14 @@ export class AppController {
     return this.appService.getLastBlock();
   }
 
-  @Get('contac-address')
-  getContactAddress(){
+  @Get('vote-contract-address')
+  getVoteContractAddress(){
     return this.appService.getVoteContractAddress();
+  }
+
+  @Get('ballot-contract-address')
+  getBallotContractAddress(){
+    return this.appService.getBallotContractAddress();
   }
 
   @Get('total-supply')
@@ -57,6 +62,11 @@ export class AppController {
   @Post('cast-vote')
   vote(@Body() body: RequestVoteDto){
     return this.appService.vote(body.address, body.proposal);
+  }
+
+  @Get('votingPower/:address')
+  async getVotingPower(@Param('address') address: string){
+    return await this.appService.votingPower(address);
   }
 
 }

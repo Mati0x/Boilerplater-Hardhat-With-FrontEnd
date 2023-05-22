@@ -93,4 +93,9 @@ export class AppService {
     .connect(address)
     .vote(proposal, 1);
   }
+
+  votingPower(address: string) {
+    return this.ballotContract
+    .votingPower(address);
+  }
 }

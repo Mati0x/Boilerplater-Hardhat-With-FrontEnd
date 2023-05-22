@@ -126,6 +126,7 @@ function requestTokens(signer, signature, setLoading, setTxData) {
 		setLoading(false);
 	});
 }
+
 function delegate(signer, signature, setLoading, setTxData) {
 	setLoading(true);
 	const requestOptions = {
