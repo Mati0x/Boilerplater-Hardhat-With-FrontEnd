@@ -13,12 +13,8 @@ export default function InstructionsComponent() {
 		<div className={styles.container}>
 			<header className={styles.header_container}>
 				<h1>
-					create<span>-web3-dapp</span>
+					<span>Vote-web3-dapp</span>
 				</h1>
-				<p>
-					Get started by editing this page in{" "}
-					<span>/pages/index.js</span>
-				</p>
 			</header>
 		<RequestTokens></RequestTokens>
 		<Delegate></Delegate>
@@ -166,12 +162,12 @@ function Delegate() {
 	  );
 }
 
-function vote(signer, signature, setLoading, setTxData) {
+function vote(signer, proposal, setLoading, setTxData) {
 	setLoading(true);
 	const requestOptions = {
 		method: 'POST',
 		headers: {'Content-Type':'application/json'},
-		body: JSON.stringify({address: signer._address, signature: signature})
+		body: JSON.stringify({address: signer._address, proposal: proposal})
 	};
 
 	fetch('http://localhost:3001/cast-vote', requestOptions)
@@ -182,7 +178,7 @@ function vote(signer, signature, setLoading, setTxData) {
 	});
 }
 
-function Vote() {
+function Vote({proposalId, proposalName}) {
 	const { data: signer } = useSigner();
 	const [txData, setTxData] = useState(null);
 	const [isLoading, setLoading] = useState(false);
@@ -195,8 +191,8 @@ function Vote() {
 	if (isLoading) return <p>wait...</p>;
 	return (
 		<div>
-		  <h1>Cast vote</h1>
-		  <button onClick={() => vote(signer, "anything", setLoading, setTxData)}
+		  <h1>Cast vote to {proposalName}</h1>
+		  <button onClick={() => vote(signer, proposalId, setLoading, setTxData)}
 		  >Cast vote</button>
 		</div>
 	  );
@@ -209,7 +205,6 @@ function OptionsProposals() {
 	
 	return (
 		<div>
-
 		<br />
 		<Autocomplete
 		  value={value}
@@ -225,6 +220,7 @@ function OptionsProposals() {
 		  sx={{ width: 300 }}
 		  renderInput={(params) => <TextField {...params} label="Proposals" />}
 		/>
+		<Vote proposalId={options.indexOf(inputValue)} proposalName={inputValue}></Vote>
 	  </div>
 	);
 }
