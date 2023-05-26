@@ -16,3 +16,9 @@ RUN Frontend
 npm run dev
 
 ```
+
+Delagate tx
+https://goerli.etherscan.io/tx/0x3b706ffe4328e04adab71ed6b39427db2288e7df5fb9d89e92d274dbea1d007b
+
+Vote tx
+https://goerli.etherscan.io/tx/0x9c9e646b69c9a75384dbb76815f24e91c5ace842450904e625d24c9a607e399a
