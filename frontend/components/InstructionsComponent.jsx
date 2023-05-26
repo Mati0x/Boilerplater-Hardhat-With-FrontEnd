@@ -1,10 +1,13 @@
 import styles from "../styles/InstructionsComponent.module.css";
 import Router, { useRouter } from "next/router";
-import {useState, useEffect} from 'react';
-import {useSigner, useNetwork, useBalance, useContractRead} from 'wagmi';
+import {useState} from 'react';
+import {useSigner, erc20ABI, useContract} from 'wagmi';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import * as React from 'react';
+import * as ballotJson from '../abi/TokenizedBallot.json';
+import * as tokenJson from '../abi/MyVoteToken.json';
+import {ethers, Contract} from 'ethers';
 
 export default function InstructionsComponent() {
 	const router = useRouter();
@@ -127,76 +130,93 @@ function requestTokens(signer, signature, setLoading, setTxData) {
 	});
 }
 
-function delegate(signer, signature, setLoading, setTxData) {
-	setLoading(true);
-	const requestOptions = {
-		method: 'POST',
-		headers: {'Content-Type':'application/json'},
-		body: JSON.stringify({address: signer._address, signature: signature})
-	};
-
-	fetch('http://localhost:3001/delegate-vote', requestOptions)
-	.then(response => response.json())
-	.then((data) => {
-		setTxData(data);
-		setLoading(false);
-	});
-}
+async function delegate(signer, tokenContract, setLoading, setTxData, setError){
+	if(signer){
+	  setLoading(true);
+	  tokenContract
+	  .connect(signer)
+	  .delegate(signer._address)
+		 .then((data) => {
+		   setTxData(data);
+		   setLoading(false);
+		   console.log("Delegation succesfully");
+		   console.log(data);
+		 }).catch((err) => {
+			setError(err.reason); 
+			setLoading(false);
+			console.log(err);
+		 });
+	}else{
+	  alert("Please connect to a wallet");
+	}
+   }
 
 function Delegate() {
 	const { data: signer } = useSigner();
 	const [txData, setTxData] = useState(null);
 	const [isLoading, setLoading] = useState(false);
-	if (txData) return (
-		<div>
-			<p>Transaction completed!</p>
-			<a href={"https://sepolia.etherscan.io/tx/" + txData.hash} target="_blank">{txData.hash}</a>
-		</div>
-	)
-	if (isLoading) return <p>Delegating vote...</p>;
-	return (
-		<div>
-		  <h1>Delegate vote</h1>
-		  <button onClick={() => delegate(signer, "anything", setLoading, setTxData)}
-		  >Delegate vote</button>
-		</div>
-	  );
+	const [errorReason, setError] = React.useState(null);
+
+	if(signer){
+		const provider = new ethers.providers.InfuraProvider("goerli", process.env.NEXT_PUBLIC_INFURA_API_KEY);
+		const tokenContract = new Contract(process.env.NEXT_PUBLIC_TOKEN_ADDRESS, tokenJson.abi, provider);
+
+		if (txData) return (
+			<div>
+				<p>Transaction completed!</p>
+				<a href={"https://goerli.etherscan.io/tx/" + txData.hash} target="_blank">{txData.hash}</a>
+			</div>
+		)
+		if (isLoading) return <p>Delegating vote...</p>;
+		return (
+			<div>
+			  <h1>Delegate vote</h1>
+			  <button onClick={async () => await delegate(signer, tokenContract, setLoading, setTxData, setError)}
+			  >Delegate vote</button>
+			</div>
+		  );
+	}
 }
 
-function vote(signer, proposal, setLoading, setTxData) {
+async function vote(signer, ballotContract, setLoading, setError, setTxData, proposalId){
 	setLoading(true);
-	const requestOptions = {
-		method: 'POST',
-		headers: {'Content-Type':'application/json'},
-		body: JSON.stringify({address: signer._address, proposal: proposal})
-	};
-
-	fetch('http://localhost:3001/cast-vote', requestOptions)
-	.then(response => response.json())
-	.then((data) => {
-		setTxData(data);
-		setLoading(false);
-	});
-}
+	ballotContract
+	.connect(signer)
+	.vote(proposalId, ethers.utils.parseUnits("1"))
+		.then((data) => {
+		  setTxData(data);
+		  setLoading(false);
+		}).catch((err) => {
+		 setError(err.reason); 
+		 setLoading(false);
+		});
+  }
 
 function Vote({proposalId, proposalName}) {
-	const { data: signer } = useSigner();
-	const [txData, setTxData] = useState(null);
-	const [isLoading, setLoading] = useState(false);
-	if (txData) return (
-		<div>
-			<p>Transaction completed!</p>
-			<a href={"https://sepolia.etherscan.io/tx/" + txData.hash} target="_blank">{txData.hash}</a>
-		</div>
-	)
-	if (isLoading) return <p>wait...</p>;
-	return (
-		<div>
-		  <h1>Cast vote to {proposalName}</h1>
-		  <button onClick={() => vote(signer, proposalId, setLoading, setTxData)}
-		  >Cast vote</button>
-		</div>
-	  );
+	const [txData, setTxData] = React.useState(null);
+	const [isLoading, setLoading] = React.useState(false);
+	const [errorReason, setError] = React.useState(null);
+	const { data:signer} = useSigner();
+
+	if(signer){
+		const provider = new ethers.providers.InfuraProvider("goerli", process.env.NEXT_PUBLIC_INFURA_API_KEY);
+		const ballotContract = new Contract(process.env.NEXT_PUBLIC_TOKEN_ADDRESS, ballotJson.abi, provider);
+
+		if (txData) return (
+			<div>
+				<p>Transaction completed!</p>
+				<a href={"https://goerli.etherscan.io/tx/" + txData.hash} target="_blank">{txData.hash}</a>
+			</div>
+		)
+		if (isLoading) return <p>wait...</p>;
+		return (
+			<div>
+			  <h1>Cast vote to {proposalName}</h1>
+			  <button onClick={async () => await vote(signer, ballotContract, setLoading, setError, setTxData, parseInt(proposalId))}
+			  >Cast vote</button>
+			</div>
+		  );
+	}
 }
 
 function OptionsProposals() {
