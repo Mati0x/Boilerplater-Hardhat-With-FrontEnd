@@ -14,7 +14,7 @@ export class AppService {
 
   constructor(private configService: ConfigService) {
 
-    this.provider = new ethers.providers.InfuraProvider("sepolia", this.configService.get<string>('INFURA_API_KEY'));
+    this.provider = new ethers.providers.InfuraProvider("goerli", this.configService.get<string>('INFURA_API_KEY'));
     this.tokenContract = new ethers.Contract(
       this.getVoteContractAddress(),
       tokenJson.abi,
@@ -69,16 +69,6 @@ export class AppService {
     .mint(address, ethers.utils.parseUnits("1"));
   }
 
-  delegate(address: string) {
-    const privateKey = this.configService.get<string>('PRIVATE_KEY');
-    const wallet = new ethers.Wallet(privateKey);
-    const signer = wallet.connect(this.provider);
-
-    return this.tokenContract
-    .connect(signer)
-    .delegate(address);
-  }
-
   async getVotes(address: string) {
     const votes = await this.tokenContract.getVotes(address);
     return ethers.utils.formatUnits(votes._hex);
@@ -86,12 +76,6 @@ export class AppService {
 
   checkSig(address: string, signature: string) {
     throw new Error('Method not implemented.');
-  }
-
-  vote(address: string, proposal: number) {
-    return this.ballotContract
-    .connect(address)
-    .vote(proposal, 1);
   }
 
   votingPower(address: string) {

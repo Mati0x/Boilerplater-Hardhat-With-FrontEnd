@@ -54,16 +54,6 @@ export class AppController {
     return this.appService.requestToken(body.address);
   }
 
-  @Post('delegate-vote')
-  delegate(@Body() body: RequestTokenDto){
-    return this.appService.delegate(body.address);
-  }
-
-  @Post('cast-vote')
-  vote(@Body() body: RequestVoteDto){
-    return this.appService.vote(body.address, body.proposal);
-  }
-
   @Get('votingPower/:address')
   async getVotingPower(@Param('address') address: string){
     return await this.appService.votingPower(address);
