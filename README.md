@@ -17,6 +17,9 @@ npm run dev
 
 ```
 
+![image](https://github.com/sebillac81/votedapp/assets/36898574/9b2d17da-5f62-41bc-a94a-b3edc750d786)
+
+
 Delagate tx
 https://goerli.etherscan.io/tx/0x3b706ffe4328e04adab71ed6b39427db2288e7df5fb9d89e92d274dbea1d007b
 
