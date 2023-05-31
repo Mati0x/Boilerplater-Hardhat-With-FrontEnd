@@ -1,32 +1,16 @@
 
-# Vote dApp Project
+# Lottery Solidity Proyect
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
+This project hass a basic Hardhat use case. It comes with the Lottery contract and a script that deploys that contract. I will also display a FrontEnd
 
-Try running some of the following tasks:
+Commands:
 
 ```shell
 deploy backend
-yarn run ts-node --files .\scripts\Deployment.ts frutilla vainilla chocolate
-
-RUN Api
-yarn start:dev
+yarn hardhat compile
+yarn hardhar run scripts/Deploy.ts
 
 RUN Frontend
 npm run dev
 
 ```
-
-![image](https://github.com/sebillac81/votedapp/assets/36898574/9b2d17da-5f62-41bc-a94a-b3edc750d786)
-
-
-Delagate tx
-https://goerli.etherscan.io/tx/0x3b706ffe4328e04adab71ed6b39427db2288e7df5fb9d89e92d274dbea1d007b
-
-Vote tx
-https://goerli.etherscan.io/tx/0x9c9e646b69c9a75384dbb76815f24e91c5ace842450904e625d24c9a607e399a
-
-http://localhost:3001/receipt?hash=0x9c9e646b69c9a75384dbb76815f24e91c5ace842450904e625d24c9a607e399a
-
-![image](https://github.com/sebillac81/votedapp/assets/36898574/97f514d4-0abb-41f2-8741-3943910fbffb)
-
