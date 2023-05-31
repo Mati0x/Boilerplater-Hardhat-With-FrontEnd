@@ -99,6 +99,15 @@ contract Lottery is Ownable {
         paymentToken.transferFrom(msg.sender, address(this), betPrice + betFee);
     }
 
+    /// @notice Calls the bet function `times` times
+    function betMany(uint256 times) external {
+        require(times > 0);
+        while (times > 0) {
+            bet();
+            times--;
+        }
+    }
+
     /// @notice Closes the lottery and calculates the prize, if any
     /// @dev Anyone can call this function at any time after the closing time
     function closeLottery() external {
@@ -120,8 +129,16 @@ contract Lottery is Ownable {
         randomNumber = block.prevrandao;
     }
 
+    /// @notice Withdraws `amount` from that accounts's prize pool
+
+    function prizeWithdraw(uint256 amount) external {
+        require(amount >= prize[msg.sender], "Not enough prize Sir!");
+        prize[msg.sender] -= amount;
+        paymentToken.transfer(msg.sender, amount);
+    }
+
     /// @notice Withdraws `amount` from the owner's pool
-    function ownerWithdraws(uint256 amount) external onlyOwner {
+    function ownerWithdraw(uint256 amount) external onlyOwner {
         require(amount <= ownerPool, "Not enough fees collected Sir!");
         ownerPool -= amount;
         paymentToken.transfer(msg.sender, amount);
