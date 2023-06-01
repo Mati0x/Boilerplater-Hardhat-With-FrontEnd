@@ -10,5 +10,7 @@ import * as tokenJson from "../abi/MyVoteToken.json";
 import { ethers, Contract } from "ethers";
 
 export default function InstructionsComponent() {
-  return <h1>Token-Lottery FrontEnd</h1>;
+  return (
+    <h1 className="text-black text-3xl font-mono">Token-Lottery FrontEnd</h1>
+  );
 }

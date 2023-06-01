@@ -1,4 +1,11 @@
 {
+  "scripts": {
+    "script": "hardhat run scripts/LocalDeploy.ts",
+    "deploy": "hardhat run scripts/Deploy.ts",
+    "accounts": "hardhat accounts",
+    "compile": "hardhat compile",
+    "generate": "hardhat run scripts/generateAccount.ts"
+  },
   "name": "aaa",
   "packageManager": "yarn@3.5.1",
   "devDependencies": {
@@ -26,6 +33,7 @@
   },
   "dependencies": {
     "@openzeppelin/contracts": "^4.8.3",
-    "dotenv": "^16.0.3"
+    "dotenv": "^16.0.3",
+    "envfile": "^6.18.0"
   }
 }
