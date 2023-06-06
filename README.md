@@ -13,6 +13,6 @@ Optimize your development workflow with the following commands:
 - `yarn scripts`: Runs a local deployment within the HardHat environment, allowing you to test your scripts interactively in the console. 
 - `yarn deploy`: Deploy your contract to a test chain effortlessly, enabling easy deployment and testing in a controlled environment.
 
-- `npm run dev` : Run your Frontend 
+- `pnpm run dev` : Run your Frontend 
 
 ```
