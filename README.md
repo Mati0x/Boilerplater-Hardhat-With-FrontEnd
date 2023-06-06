@@ -1,19 +1,18 @@
 
 # Optimize your development process with a pre-configured Boilerplate Hardhat and a ready-to-use Frontend setup
 
-project setup with a comprehensive backend that implements contracts using HardHat, OpenZeppelin, and Typechain, coupled with a dynamic frontend featuring powerful frameworks like Wagmi, Rainbowkit, and UI libraries such as Tailwind and/or Chakra-UI.
+Project setup with a comprehensive backend that implements contracts using HardHat, OpenZeppelin, and Typechain, coupled with a dynamic frontend featuring powerful frameworks like Wagmi, Rainbowkit, and UI libraries such as Tailwind and/or Chakra-UI.
 
 
 Commands:
 ```shell
-backend
-yarn compile       :compile the contracts and auto generates the typechain types
-yarn generate      :auto generate a private-key in case you need 
-yarn scripts       :runs a local deploy withthin HardHat enviorment, and also test your scripsts in an interactive way with the console
-yarn deploy        :to deploy your contract to a Test chain
+Optimize your development workflow with the following commands:
 
+- `yarn compile`: This command compiles the contracts and automatically generates the Typechain types, ensuring type safety in your project.
+- `yarn generate`: Automatically generates a private key if needed
+- `yarn scripts`: Runs a local deployment within the HardHat environment, allowing you to test your scripts interactively in the console. 
+- `yarn deploy`: Deploy your contract to a test chain effortlessly, enabling easy deployment and testing in a controlled environment.
 
-Frontend
-npm run dev
+- `npm run dev` : Run your Frontend 
 
 ```
