@@ -1,17 +1,17 @@
 import { ethers } from "hardhat";
-import * as readline from "readline";
-import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
-import { Lottery, LotteryToken } from "../typechain-types";
+import {} from "../typechain-types";
 import * as dotenv from "dotenv";
 dotenv.config();
 
-const BET_PRICE = 1;
-const BET_FEE = 0.2;
-const TOKEN_RATIO = 1;
-
 async function main() {
-  console.log("PRIVATE_KEY");
-  console.log(process.env.DEPLOYER_PRIVATE_KEY);
+  // console.log("DEPLOYER PRIVATE_KEY");
+  // console.log(process.env.DEPLOYER_PRIVATE_KEY);
+  // const wallet = new ethers.Wallet(process.env.DEPLOYER_PRIVATE_KEY ?? "");
+  // const provider = new ethers.providers.InfuraProvider(
+  //   "sepolia",
+  //   process.env.INFURA_API_KEY
+  // );
+  // const signer = wallet.connect(provider);
 }
 
 main().catch((error) => {

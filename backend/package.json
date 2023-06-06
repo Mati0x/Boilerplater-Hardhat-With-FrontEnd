@@ -4,7 +4,7 @@
     "deploy": "hardhat run scripts/Deploy.ts",
     "accounts": "hardhat accounts",
     "compile": "hardhat compile",
-    "generate": "hardhat run scripts/generateAccount.ts"
+    "generate": "hardhat run scripts/GenerateAccount.ts"
   },
   "name": "aaa",
   "packageManager": "yarn@3.5.1",
