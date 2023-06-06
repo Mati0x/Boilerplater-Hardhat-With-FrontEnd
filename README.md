@@ -1,10 +1,10 @@
 
-# Boilerplate Hardhat and a ready to use Frontend
+# Optimize your development process with a pre-configured Boilerplate Hardhat and a ready-to-use Frontend setup
 
- includes: a backend to implements contracts with HardHat, openZeppelling and Typechain. And a frontend with Wagmi, Ranibowkit, Tailwind and / or Chakra-ui. 
+project setup with a comprehensive backend that implements contracts using HardHat, OpenZeppelin, and Typechain, coupled with a dynamic frontend featuring powerful frameworks like Wagmi, Rainbowkit, and UI libraries such as Tailwind and/or Chakra-UI.
+
 
 Commands:
-
 ```shell
 backend
 yarn compile       :compile the contracts and auto generates the typechain types
